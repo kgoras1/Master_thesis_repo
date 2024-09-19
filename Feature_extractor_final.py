@@ -48,7 +48,7 @@ def load_image(path):
         return None, None
 
 # Define input directory containing the subdirectories
-input_dir = '/Users/konstantinospapagoras/Desktop/data/'
+input_dir = '/Volumes/Seagate Expansion Drive/LSCC:LUAD nobgr kp algorithm/LSCC:LUAD:NoBackroundFinal_Tiles/untitled folder/'
 
 # Initialize lists to store data
 features = []
@@ -59,6 +59,7 @@ def process_image(img_path, first_subdir):
     img, x = load_image(img_path)
     if img is not None and x is not None:
         feat = feat_extractor.predict(x)[0]
+        print(len(feat))
         return feat, first_subdir, img
     return None, None, None
 
@@ -88,8 +89,9 @@ features = np.array(features)
 labels = np.array(labels)
 
 print(len(features))
+print(np.unique(labels))
 # Save features and labels to a pickle file
-pickle.dump((features, labels), open(os.path.join(input_dir, 'features_data_labels.pkl'), 'wb'))
+pickle.dump((features, labels), open(os.path.join(input_dir, 'features_data_labels_nobgr.pkl'), 'wb'))
 
 # #Simplify the true labels
 # simplified_labels = np.array(['LSCC' if 'LSCC' in label else 'LUAD' for label in labels])
